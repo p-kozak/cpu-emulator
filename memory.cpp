@@ -8,6 +8,7 @@ uint32_t Memory::readCell(int cell){
     }else{
         cout << "ERROR: Trying to read NULL memory address" << endl;
     }
+    return 0;
 }
 
 void Memory::writeCell(int cell, uint32_t content){

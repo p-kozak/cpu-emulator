@@ -10,3 +10,22 @@ Registers::Registers(){
 Registers::~Registers(){
     delete[] registers;
 }
+
+void Registers::writeRegister(int index, uint32_t content){
+    if(index < NUMBER_OF_REGISTERS && index >= 0){
+        registers[index] = content;
+    }else{
+        std::cout << "ERROR: Wrong access of register" << std::endl;
+    }
+    return;
+}
+
+uint32_t Registers::readRegister(int index){
+    if(index < NUMBER_OF_REGISTERS && index >= 0){
+        return registers[index];
+    }else{
+        std::cout << "ERROR: Wrong access of register" << std::endl;
+        return 0;
+    }
+
+}
