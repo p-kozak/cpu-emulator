@@ -17,12 +17,16 @@ Now, if it's of type add/sub or w/e:
 If it's of type load or  w/e:
 21:0 for address 
 
+Also, if it's of type BNE
+5 opcode, 5 target 1, 5 target 2, 
+
 opcodes:
 ADD     00000
 ADDI    00001
-SUB     00010
+SUB     00010     No need for SUBI as you can simply use ADDI and negative number
 LW      00011
 SW      00011
+BNE     00100  
 */
 
 class Memory{
@@ -33,6 +37,7 @@ class Memory{
     void writeCell(int cell, uint32_t content);
     uint32_t readCell(int cell); 
     void pushCell(uint32_t content);
+    
 
 };
 

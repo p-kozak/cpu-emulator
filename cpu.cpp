@@ -1,16 +1,15 @@
-#include <iostream>
-#include "memory.h" 
-#include "registers.h"
-#include "alu.h"
+#include "cpu.h"
 
 using namespace std;
+   
+Cpu::Cpu(/* args */){
+    instruction = 0;
+}
 
-int main(void){
-    ///Initalise all objects
-    Memory memory;
-    Alu alu; 
-    Registers registers; 
+Cpu::~Cpu(){
 
+}
 
-    return 0;
+uint32_t Cpu::instructionFetch(int index){
+    return memory.readCell(index);
 }

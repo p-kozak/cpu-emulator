@@ -15,7 +15,7 @@ void Registers::writeRegister(int index, uint32_t content){
     if(index < NUMBER_OF_REGISTERS && index >= 0){
         registers[index] = content;
     }else{
-        std::cout << "ERROR: Wrong access of register" << std::endl;
+        std::cout << "ERROR: Wrong address of register" << std::endl;
     }
     return;
 }
@@ -24,7 +24,7 @@ uint32_t Registers::readRegister(int index){
     if(index < NUMBER_OF_REGISTERS && index >= 0){
         return registers[index];
     }else{
-        std::cout << "ERROR: Wrong access of register" << std::endl;
+        std::cout << "ERROR: Wrong address of register" << std::endl;
         return 0;
     }
 

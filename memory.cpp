@@ -3,7 +3,7 @@
 using namespace std;
 
 uint32_t Memory::readCell(int cell){
-    if(cell < memory.size()){
+    if(cell < (int)memory.size()){
         return memory[cell];
     }else{
         cout << "ERROR: Trying to read NULL memory address" << endl;
@@ -12,7 +12,7 @@ uint32_t Memory::readCell(int cell){
 }
 
 void Memory::writeCell(int cell, uint32_t content){
-    if(cell >= memory.size()){
+    if(cell >= (int)memory.size()){
         memory[cell] = content;
     }else{
         cout << "ERROR: Trying to write to NULL address. Push instrad" << endl;
