@@ -5,8 +5,9 @@
 #include <stdint.h>
 #include <iostream>
 
-
-
+//Enumarate opcodes
+enum {ADD = 0b00000, ADDI = 0b00001, SUB = 0b00010, LW = 0b00011, \
+SW = 0b00100, BEQ = 0b00101};
 /*Instruction format(Here we go!):
 32 bits
 5 bits for opcode - 31:27
@@ -25,8 +26,8 @@ ADD     00000
 ADDI    00001
 SUB     00010     No need for SUBI as you can simply use ADDI and negative number
 LW      00011
-SW      00011
-BNE     00100  
+SW      00100
+BEQ     00101  BRANCH EQUAL
 */
 
 class Memory{
