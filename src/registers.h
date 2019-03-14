@@ -9,8 +9,8 @@ class Registers{
     public:
     Registers();
     ~Registers();
-    int32_t readRegister(int index);
-    void writeRegister(int index, int32_t content);
+    int32_t readRegister(int32_t index);
+    void writeRegister(int32_t index, int32_t content);
 
     private:
     int32_t* registers;

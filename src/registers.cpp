@@ -11,7 +11,7 @@ Registers::~Registers(){
     delete[] registers;
 }
 
-void Registers::writeRegister(int index, int32_t content){
+void Registers::writeRegister(int32_t index, int32_t content){
     if(index < NUMBER_OF_REGISTERS && index >= 0){
         registers[index] = content;
     }else{
@@ -20,7 +20,7 @@ void Registers::writeRegister(int index, int32_t content){
     return;
 }
 
-int32_t Registers::readRegister(int index){
+int32_t Registers::readRegister(int32_t index){
     if(index < NUMBER_OF_REGISTERS && index >= 0){
         return registers[index];
     }else{

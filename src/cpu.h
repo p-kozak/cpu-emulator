@@ -11,7 +11,7 @@
 using namespace std;
 
 class Cpu{
-private:
+public:
     //Subcomponents of the cpu
     Memory memory;
     Alu alu;

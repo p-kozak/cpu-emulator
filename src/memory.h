@@ -22,7 +22,7 @@ Also, if it's of type BNE
 5 opcode, 5 target 1, 5 target 2, 
 
 ADDI:
-5 opcode, 5 reg1, 5 reg2, 1 empty, 16 number - 2's complement so sign + 15 bits
+5 opcode, 5 target, 5 reg2, 1 empty, 16 number - 2's complement so sign + 15 bits
 
 opcodes:
 ADD     00000
@@ -38,8 +38,8 @@ class Memory{
     std::vector<int32_t>  memory;
 
     public:
-    void writeCell(int cell, int32_t content);
-    int32_t readCell(int cell); 
+    void writeCell(int32_t cell, int32_t content);
+    int32_t readCell(int32_t cell); 
     void pushCell(int32_t content);
     
 
