@@ -40,13 +40,15 @@ int32_t Cpu::instructionDecodeThirdRegister(int32_t instruction){
 
 int32_t Cpu::instructionDecodeMemoryAddress(int32_t instruction){
     //Here we are just going to set the first 10 MS bits to 0 and return the rest
-    return (instruction & (0x0000000000 << (32 - 10)));
+    return (instruction & (0x003FFFFF ));
 }
 
 int32_t Cpu::instructionDecodeAddiNumber(int32_t instruction){
     // DONE. Work on this, not complete. return 17 bit's in 2's complement but won't be recognised as such
-    int32_t numBin = (instruction & (0xFFFF));
+    // Actually I'm not sure if all this mess is required. Probably I could just cast the instruction to int16_t and work on this...
+    // But ir works so I'm fine :)))
 
+    int32_t numBin = (instruction & (0xFFFF));
     int32_t sign  = numBin >> 15; 
     if(sign == 0){
         return numBin;
@@ -60,14 +62,20 @@ int32_t Cpu::instructionDecodeAddiNumber(int32_t instruction){
 
 void Cpu::instructionExecute(int32_t instruction){
     int32_t opcode = instructionDecodeOpcode(instruction);
-    cout << opcode << endl; 
+    //cout << "Opcode " << opcode << endl;
     //not all will be used but I declare  them here to not waste space
-    int32_t regTargetAddress, regSecondAddress, regThirdAddress, memoryAddress, regSecondVal, regThirdVal; 
-    cout << "dupa1" << endl;
+    int32_t regTargetAddress, regTargetVal, regSecondAddress, regThirdAddress, memoryAddress, regSecondVal, regThirdVal, memoryVal; 
     switch(opcode){
         case ADD:
+            regTargetAddress = instructionDecodeFirstRegister(instruction);
+            regSecondAddress = instructionDecodeSecondRegister(instruction);
+            regThirdAddress = instructionDecodeThirdRegister(instruction);
+            regSecondVal = registers.readRegister(regSecondAddress);
+            regThirdVal = registers.readRegister(regThirdAddress);
+            registers.writeRegister(regTargetAddress, alu.add(regSecondVal, regThirdVal));
             break;
         case ADDI:
+            //Here I am using the rhird register variable just to store the value of ADDI immediate value
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             regSecondAddress = instructionDecodeSecondRegister(instruction);
             regSecondVal = registers.readRegister(regSecondAddress);
@@ -75,10 +83,25 @@ void Cpu::instructionExecute(int32_t instruction){
             registers.writeRegister(regTargetAddress, alu.add(regSecondVal, regThirdVal));
             break;
         case SUB:
+            regTargetAddress = instructionDecodeFirstRegister(instruction);
+            regSecondAddress = instructionDecodeSecondRegister(instruction);
+            regThirdAddress = instructionDecodeThirdRegister(instruction);
+
+            regSecondVal = registers.readRegister(regSecondAddress);
+            regThirdVal = registers.readRegister(regThirdAddress);
+      
+            registers.writeRegister(regTargetAddress, alu.sub(regSecondVal, regThirdVal));
             break;
         case LW:
+            regTargetAddress = instructionDecodeFirstRegister(instruction);
+            memoryAddress = instructionDecodeMemoryAddress(instruction);
+            memoryVal = memory.readCell(memoryAddress);
+            registers.writeRegister(regTargetAddress, memoryVal);
             break;
         case SW:
+            regTargetAddress = instructionDecodeFirstRegister(instruction);
+            regTargetVal = registers.readRegister(regTargetAddress);
+            memory.pushCell(regTargetVal);
             break;
         case BEQ:
             break;
