@@ -2,7 +2,7 @@
 
 Registers::Registers(){
 
-    // Inistalises registers as value 
+    // Inistalises registers as value 0
     registers = new uint32_t[NUMBER_OF_REGISTERS]();
     
 }

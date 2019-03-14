@@ -31,6 +31,12 @@ public:
     uint32_t instructionDecodeFirstRegister(uint32_t instruction);
     uint32_t instructionDecodeSecondRegister(uint32_t instruction);
     uint32_t instructionDecodeThirdRegister(uint32_t instruction);
+    uint32_t instructionDecodeMemoryAddress(uint32_t instruction);
+    uint32_t instructionDecodeAddiNumber(uint32_t instruction);
+
+
+    //Functions for execution
+    void instructionExecute(uint32_t instruction);
 };
 
 
