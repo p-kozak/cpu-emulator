@@ -1,7 +1,7 @@
 #ifndef CPU
 #define CPU
 
-#include <iostream>
+#include "config.h"
 #include <memory>
 #include "memory.h" 
 #include "registers.h"

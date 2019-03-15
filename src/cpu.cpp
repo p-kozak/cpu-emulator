@@ -65,7 +65,6 @@ void Cpu::instructionExecute(int32_t instruction){
     //cout << "Opcode " << opcode << endl;
     //not all will be used but I declare  them here to not waste space
     int32_t regTargetAddress, regTargetVal, regSecondAddress, regThirdAddress, memoryAddress, regSecondVal, regThirdVal, memoryVal; 
-    
     switch(opcode){
         case ADD:
             regTargetAddress = instructionDecodeFirstRegister(instruction);
@@ -124,8 +123,6 @@ void Cpu::instructionExecute(int32_t instruction){
             // just break, nothing to do here
             break;
         case JP:
-            cout << "HETEE" << endl;
-
             //First, decode memory address. You don't need to decode label number as it was transalted to memory address by assembler
             memoryAddress = instructionDecodeMemoryAddress(instruction);
             pc.setCounter(memoryAddress);

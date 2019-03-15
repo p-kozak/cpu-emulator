@@ -2,7 +2,6 @@
 #define PROGRAMCOUNTER
 
 #include "config.h"
-#include "stdint.h"
 
 class ProgramCounter{
     private:

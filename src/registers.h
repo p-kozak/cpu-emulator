@@ -1,9 +1,8 @@
 #ifndef REGISTERS
 #define REGISTERS
 
-#include <stdint.h>
 #include "config.h"
-#include <iostream>
+
 
 class Registers{
     public:

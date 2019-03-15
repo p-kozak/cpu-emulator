@@ -2,7 +2,6 @@
 #define ALU
 
 #include "config.h"
-#include <stdint.h>
 
 class Alu{
     public:

@@ -1,10 +1,7 @@
 #ifndef MEMORY
 #define MEMORY
 
-#include <vector>
-#include <stdint.h>
-#include <iostream>
-
+#include "config.h"
 //Enumarate opcodes
 enum {ADD = 0b00000, ADDI = 0b00001, SUB = 0b00010, LW = 0b00011, \
 SW = 0b00100, BEQ = 0b00101, LBL = 0b00110, JP= 0b00111};
