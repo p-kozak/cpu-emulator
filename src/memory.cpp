@@ -6,7 +6,7 @@ int32_t Memory::readCell(int32_t cell){
     if(cell < (int32_t)memory.size()){
         return memory[cell];
     }else{
-        cout << "ERROR: Trying to read NULL memory address" << endl;
+        cout << "ERROR: Trying to read NULL memory address TEST" << endl;
     }
     return 0;
 }

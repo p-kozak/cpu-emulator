@@ -10,7 +10,12 @@ void ProgramCounter::incrementCounter(){
     return;
 }
 
-void ProgramCounter::setCounter(int index){
+void ProgramCounter::incrementCounter(int32_t i){
+    counter+=i;
+    return;
+}
+
+void ProgramCounter::setCounter(int32_t index){
     if(index >= 0){
         counter = index;
     }else{

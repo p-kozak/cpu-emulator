@@ -65,6 +65,7 @@ void Cpu::instructionExecute(int32_t instruction){
     //cout << "Opcode " << opcode << endl;
     //not all will be used but I declare  them here to not waste space
     int32_t regTargetAddress, regTargetVal, regSecondAddress, regThirdAddress, memoryAddress, regSecondVal, regThirdVal, memoryVal; 
+    
     switch(opcode){
         case ADD:
             regTargetAddress = instructionDecodeFirstRegister(instruction);
@@ -83,10 +84,11 @@ void Cpu::instructionExecute(int32_t instruction){
             registers.writeRegister(regTargetAddress, alu.add(regSecondVal, regThirdVal));
             break;
         case SUB:
+            //Decode addresses of 3 registers
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             regSecondAddress = instructionDecodeSecondRegister(instruction);
             regThirdAddress = instructionDecodeThirdRegister(instruction);
-
+            //Read Values in registers which are no target
             regSecondVal = registers.readRegister(regSecondAddress);
             regThirdVal = registers.readRegister(regThirdAddress);
       
@@ -104,8 +106,30 @@ void Cpu::instructionExecute(int32_t instruction){
             memory.pushCell(regTargetVal);
             break;
         case BEQ:
+            //retrive two first registers and their vaue
+            regTargetAddress = instructionDecodeFirstRegister(instruction);
+            regSecondAddress = instructionDecodeSecondRegister(instruction);
+            regTargetVal = registers.readRegister(regTargetAddress); 
+            regSecondVal = registers.readRegister(regSecondAddress);
+            //if branch taken, omit the jump
+            if(regTargetVal == regSecondVal){
+                pc.incrementCounter(2); 
+            }else{
+                //otherwise, let the jump happen 
+                pc.incrementCounter();
+            }
+            
             break;
+        case LBL:
+            // just break, nothing to do here
+            break;
+        case JP:
+            cout << "HETEE" << endl;
 
+            //First, decode memory address. You don't need to decode label number as it was transalted to memory address by assembler
+            memoryAddress = instructionDecodeMemoryAddress(instruction);
+            pc.setCounter(memoryAddress);
+            break;
 
     }
 }

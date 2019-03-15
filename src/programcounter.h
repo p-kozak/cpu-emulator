@@ -2,6 +2,7 @@
 #define PROGRAMCOUNTER
 
 #include "config.h"
+#include "stdint.h"
 
 class ProgramCounter{
     private:
@@ -10,7 +11,8 @@ class ProgramCounter{
     public:
     ProgramCounter();
     void incrementCounter();
-    void setCounter(int index);
+    void incrementCounter(int32_t i);
+    void setCounter(int32_t index);
     int checkCounter();
 };
 
