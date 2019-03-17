@@ -4,7 +4,7 @@
 #include "config.h"
 //Enumarate opcodes
 enum {ADD = 0b00000, ADDI = 0b00001, SUB = 0b00010, LW = 0b00011, \
-SW = 0b00100, BEQ = 0b00101, LBL = 0b00110, JP= 0b00111};
+SW = 0b00100, BEQ = 0b00101, LBL = 0b00110, JP= 0b00111, EF = 0b01000};
 /*Instruction format(Here we go!):
 32 bits
 5 bits for opcode - 31:27
@@ -36,6 +36,7 @@ SW      00100
 BEQ     00101  BRANCH EQUAL 
 LBL     00110   label
 JP      00111   jump to label
+EF      01000   end of file
 */
 
 class Memory{

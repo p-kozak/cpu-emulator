@@ -128,5 +128,8 @@ void Cpu::instructionExecute(int32_t instruction){
             pc.setCounter(memoryAddress);
             break;
 
+        case EF:
+            std::exit(0);
+
     }
 }

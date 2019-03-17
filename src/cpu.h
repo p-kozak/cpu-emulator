@@ -6,6 +6,7 @@
 #include "memory.h" 
 #include "registers.h"
 #include "alu.h"
+#include "asmb.h"
 #include "programcounter.h"
 
 using namespace std;

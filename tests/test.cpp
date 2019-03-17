@@ -2,7 +2,8 @@
 #include "catch.hpp"
 #include "../src/cpu.h"
 
-TEST_CASE("My Test"){
+
+TEST_CASE("CPU"){
     Cpu cpu;
     SECTION("2's complement"){
         REQUIRE(cpu.instructionDecodeAddiNumber(3545) == 3545);
@@ -114,6 +115,10 @@ TEST_CASE("My Test"){
         REQUIRE(cpu.pc.checkCounter() == 16);
     }
 
+    SECTION("ASM"){
+        Assembler asmb;
+        asmb.convertAssemblyToMachineCode();
+    }
+
 }
 
- 
