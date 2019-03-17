@@ -17,9 +17,9 @@ Assembler::~Assembler(){
     inFile.close();
 }
 
-void Assembler::convertAssemblyToMachineCode(){
+void Assembler::convertAssemblyToMachineCode(Memory &memory){
     while(inFile >> opcode){
-        readSingleLine(opcode);
+        memory.pushCell(readSingleLine(opcode));
     }
 
 }
@@ -35,7 +35,7 @@ int32_t Assembler::readWord(){
 
 }
 
-void Assembler::readSingleLine(std::string opcode){
+int32_t Assembler::readSingleLine(std::string opcode){
     D  DP("Assembling a single line");
     //if(DEBUG) cout << "Assembling a single line." << endl;
     //check which opcode is that and generate machine code 
@@ -65,7 +65,8 @@ void Assembler::readSingleLine(std::string opcode){
         D DPV("Reg3: ", bitword);
         ins =  (ins | (bitword << (32-20)));
 
-        cout << ins << endl;
+        D DPV("Machine code instruction: ", ins);
+        DEL;
     }
 
     if(opcode == "ADDI"){
@@ -87,7 +88,8 @@ void Assembler::readSingleLine(std::string opcode){
         D DPV("Immediate value: ", bitword);
         ins = (ins | bitword);
         
-        cout << ins <<endl;
+        D DPV("Machine code instruction: ", ins);
+        DEL;
 
     }
 
@@ -103,6 +105,8 @@ void Assembler::readSingleLine(std::string opcode){
         D DPV("Address: ", bitword);
         ins = (ins | bitword);
 
+        D DPV("Machine code instruction: ", ins);
+        DEL;
     }
 
     if(opcode == "SW"){
@@ -112,6 +116,9 @@ void Assembler::readSingleLine(std::string opcode){
         bitword = readWord();
         D DPV("Reg1: ", bitword);
         ins = (ins | (bitword << (32-10)));
+
+        D DPV("Machine code instruction: ", ins);
+        DEL;
     }
 
     if(opcode == "BEQ"){
@@ -125,6 +132,9 @@ void Assembler::readSingleLine(std::string opcode){
         D DPV("Reg2: ", bitword);
         ins = (ins | (bitword << (32-15)));
 
+        D DPV("Machine code instruction: ", ins);
+        DEL;
+
     }
 
     if(opcode == "LBL"){
@@ -134,6 +144,9 @@ void Assembler::readSingleLine(std::string opcode){
         bitword = readWord();
         D DPV("Label index: ", bitword);
         ins = (ins | (bitword << (32-10)));
+
+        D DPV("Machine code instruction: ", ins);
+        DEL;
 
     }
 
@@ -145,14 +158,19 @@ void Assembler::readSingleLine(std::string opcode){
         D DPV("Label index: ", bitword);
         ins = (ins | (bitword << (32-10)));
 
+        D DPV("Machine code instruction: ", ins);
+        DEL;
+
     }
 
     if(opcode == "EF"){
         ins = (ins | (EF << (32-5)));
         D DP("Instruction EF");
+
+        D DPV("Machine code instruction: ", ins);
+        DEL;
     }
 
-    
-    //remember to add passing to memory later, by reference probably
+    return ins;
 }
 

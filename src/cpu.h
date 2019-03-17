@@ -18,8 +18,10 @@ public:
     Alu alu;
     ProgramCounter pc;
     Registers registers;
+    Assembler asmb;
 
     int32_t instruction;
+    int dbg;
 
 public:
     Cpu(/* args */);

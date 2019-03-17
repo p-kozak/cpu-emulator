@@ -2,6 +2,7 @@
 #define ASMB
 
 #include "config.h"
+#include "memory.h"
 #include <fstream>
 #include <string>
 
@@ -16,10 +17,10 @@ class Assembler{
     the another function skims over memory, finds all jump instructions and then looks for a labels and
     replaces indices with addresses*/
     void addAddressesToJumps();
-    void convertAssemblyToMachineCode();
-    void readSingleLine(std::string opcode);
+    void convertAssemblyToMachineCode(Memory &memory);
+    int32_t readSingleLine(std::string opcode);
     int32_t readWord();
-    
+
 
 
 };

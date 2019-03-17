@@ -15,6 +15,7 @@ to fail otherwise*/
 #endif
 #define DS cout << 
 #define DE << endl
+#define DEL cout << endl
 #define DP(st) cout << st << endl
 #define DPV(st,val) cout << st << val << endl
 

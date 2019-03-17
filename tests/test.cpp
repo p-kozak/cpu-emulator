@@ -117,7 +117,10 @@ TEST_CASE("CPU"){
 
     SECTION("ASM"){
         Assembler asmb;
-        asmb.convertAssemblyToMachineCode();
+        asmb.convertAssemblyToMachineCode(cpu.memory);
+        for(int i =0; i < 5; i++){
+            cout << cpu.memory.readCell(i) << endl;
+        }
     }
 
 }

@@ -4,6 +4,19 @@ using namespace std;
    
 Cpu::Cpu(/* args */){
     instruction = 0;
+    asmb.convertAssemblyToMachineCode(memory);
+    dbg = 0;
+    //To run units tets, comment this out
+    while(dbg < 10){
+        //Execute while True. Program should exit automatically at the end
+        //Might implement some safety measurement later...
+        
+        instructionExecute(memory.readCell(pc.checkCounter()));
+        cout << registers.readRegister(0) << " "
+        << registers.readRegister(1) << " "
+        << registers.readRegister(2) << endl;
+        dbg++;
+    }
 }
 
 Cpu::~Cpu(){
@@ -73,6 +86,7 @@ void Cpu::instructionExecute(int32_t instruction){
             regSecondVal = registers.readRegister(regSecondAddress);
             regThirdVal = registers.readRegister(regThirdAddress);
             registers.writeRegister(regTargetAddress, alu.add(regSecondVal, regThirdVal));
+            pc.incrementCounter();
             break;
         case ADDI:
             //Here I am using the rhird register variable just to store the value of ADDI immediate value
@@ -81,6 +95,7 @@ void Cpu::instructionExecute(int32_t instruction){
             regSecondVal = registers.readRegister(regSecondAddress);
             regThirdVal  = instructionDecodeAddiNumber(instruction);
             registers.writeRegister(regTargetAddress, alu.add(regSecondVal, regThirdVal));
+            pc.incrementCounter();
             break;
         case SUB:
             //Decode addresses of 3 registers
@@ -92,17 +107,20 @@ void Cpu::instructionExecute(int32_t instruction){
             regThirdVal = registers.readRegister(regThirdAddress);
       
             registers.writeRegister(regTargetAddress, alu.sub(regSecondVal, regThirdVal));
+            pc.incrementCounter();
             break;
         case LW:
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             memoryAddress = instructionDecodeMemoryAddress(instruction);
             memoryVal = memory.readCell(memoryAddress);
             registers.writeRegister(regTargetAddress, memoryVal);
+            pc.incrementCounter();
             break;
         case SW:
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             regTargetVal = registers.readRegister(regTargetAddress);
             memory.pushCell(regTargetVal);
+            pc.incrementCounter();
             break;
         case BEQ:
             //retrive two first registers and their vaue
@@ -121,6 +139,7 @@ void Cpu::instructionExecute(int32_t instruction){
             break;
         case LBL:
             // just break, nothing to do here
+            pc.incrementCounter();
             break;
         case JP:
             //First, decode memory address. You don't need to decode label number as it was transalted to memory address by assembler
