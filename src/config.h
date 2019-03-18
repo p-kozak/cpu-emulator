@@ -8,7 +8,7 @@ to fail otherwise*/
 #include <iostream>
 #define NUMBER_OF_REGISTERS 32 
 #define DEBUG   //comment out to exit debug mode
-#define DEBUGALL // same
+//#define DEBUGALL // same
 
 #ifdef DEBUG
  #define D if(1) 

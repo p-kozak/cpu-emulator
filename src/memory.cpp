@@ -3,6 +3,7 @@
 using namespace std;
 
 int32_t Memory::readCell(int32_t cell){
+    DA DPV("Reading memory value at address: ", cell);
     if(cell < (int32_t)memory.size()){
         return memory[cell];
     }else{
@@ -12,6 +13,9 @@ int32_t Memory::readCell(int32_t cell){
 }
 
 void Memory::writeCell(uint32_t cell, int32_t content){
+    DA DPV("Writing to memory at address: ", cell);
+    DA DPV("The argument is: ", content);
+
     if(cell < memory.size()){
         memory[cell] = content;
     }else{
@@ -20,6 +24,7 @@ void Memory::writeCell(uint32_t cell, int32_t content){
 }
 
 void Memory::pushCell(int32_t content){
+    DA DPV("Pushing memoery with: ", content);
     memory.push_back(content);
     return; 
 }

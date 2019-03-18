@@ -126,12 +126,15 @@ int32_t Assembler::readSingleLine(std::string opcode){
         DEL;
     }
 
-    if(opcode == "BEQ" || opcode == "BNE"){
+    if(opcode == "BEQ" || opcode == "BNE" || opcode == "GEQ"){
         if(opcode == "BEQ"){
             ins = (ins | (BEQ << (32-5)));
             D DP("Instruction BEQ");
-        }else{
+        }else if(opcode =="BNE"){
             ins = (ins | (BNE << (32-5)));
+            D DP("Instruction BNE");
+        }else{
+            ins = (ins | (GEQ << (32-5)));
             D DP("Instruction BNE");
         }
         //read two registers
@@ -146,6 +149,8 @@ int32_t Assembler::readSingleLine(std::string opcode){
         DEL;
 
     }
+
+    
 
     if(opcode == "LBL"){
         ins = (ins | (LBL << (32-5)));

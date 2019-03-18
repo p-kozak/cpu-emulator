@@ -174,6 +174,21 @@ void Cpu::instructionExecute(int32_t instruction){
             }
             break;
 
+        case GEQ:
+            //retrive two first registers and their vaue
+            regTargetAddress = instructionDecodeFirstRegister(instruction);
+            regSecondAddress = instructionDecodeSecondRegister(instruction);
+            regTargetVal = registers.readRegister(regTargetAddress); 
+            regSecondVal = registers.readRegister(regSecondAddress);
+            //if branch taken, omit the jump
+            if(regTargetVal >= regSecondVal){
+                pc.incrementCounter(2); 
+            }else{
+                //otherwise, let the jump happen 
+                pc.incrementCounter();
+            }
+            break;
+
         case LBL:
             // just break, nothing to do here
             pc.incrementCounter();
