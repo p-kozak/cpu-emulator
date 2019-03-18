@@ -4,7 +4,7 @@
 #include "config.h"
 //Enumarate opcodes
 enum {ADD = 0b00000, ADDI = 0b00001, SUB = 0b00010, LW = 0b00011, \
-SW = 0b00100, BEQ = 0b00101, LBL = 0b00110, JP= 0b00111, EF = 0b01000};
+SW = 0b00100, BEQ = 0b00101, LBL = 0b00110, JP= 0b00111, EF = 0b01000, BNE = 0b01001, MUL = 0b01010};
 /*Instruction format(Here we go!):
 32 bits
 5 bits for opcode - 31:27
@@ -21,7 +21,7 @@ Also, if it's of type BNE
 ADDI:
 5 opcode, 5 target, 5 reg2, 1 empty, 16 number - 2's complement so sign + 15 bits
 
-BEG: 5 opcode, 5 second, 5 third 
+BEQ/ BNE: 5 opcode, 5 second, 5 third 
 branch equal. After brnach there is always a jump instructon. If the branch is taken, pc i inceremented by two to avoid jump
 Not smart but works 
 

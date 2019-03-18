@@ -17,9 +17,10 @@ class Assembler{
     the another function skims over memory, finds all jump instructions and then looks for a labels and
     replaces indices with addresses*/
     void addAddressesToJumps(Memory &memory);
-    void convertAssemblyToMachineCode(Memory &memory);
+    void convertAssemblyToMachineCode(Memory &memory, std::string name);
     int32_t readSingleLine(std::string opcode);
     int32_t readWord();
+    void openFile(std::string name);
 
 
 

@@ -5,19 +5,24 @@
 using namespace std;
 
 Assembler::Assembler(){
-    inFile.open("prog.txt");
-    //Check if file is opened
-    if (!inFile) {
-        cerr << "Unable to open file datafile.txt";
-        exit(1);   // call system to stop
-    }
 }
 
 Assembler::~Assembler(){
     inFile.close();
 }
 
-void Assembler::convertAssemblyToMachineCode(Memory &memory){
+void Assembler::openFile(std::string name){
+    inFile.open(name);
+    //Check if file is opened
+    if (!inFile) {
+        cerr << "Unable to open file " << name;
+        std::exit(1);   // call system to stop
+    }else{
+        cout << "File " << name << " opened!" << endl << endl;
+    }
+}
+void Assembler::convertAssemblyToMachineCode(Memory &memory, std::string name){
+    openFile(name);
     while(inFile >> opcode){
         memory.pushCell(readSingleLine(opcode));
     }
@@ -121,9 +126,14 @@ int32_t Assembler::readSingleLine(std::string opcode){
         DEL;
     }
 
-    if(opcode == "BEQ"){
-         ins = (ins | (BEQ << (32-5)));
-        D DP("Instruction BEQ");
+    if(opcode == "BEQ" || opcode == "BNE"){
+        if(opcode == "BEQ"){
+            ins = (ins | (BEQ << (32-5)));
+            D DP("Instruction BEQ");
+        }else{
+            ins = (ins | (BNE << (32-5)));
+            D DP("Instruction BNE");
+        }
         //read two registers
         bitword = readWord();
         D DPV("Reg1: ", bitword);
@@ -166,6 +176,27 @@ int32_t Assembler::readSingleLine(std::string opcode){
     if(opcode == "EF"){
         ins = (ins | (EF << (32-5)));
         D DP("Instruction EF");
+
+        D DPV("Machine code instruction: ", ins);
+        DEL;
+    }
+    
+    if(opcode == "MUL"){
+        ins = (ins | (MUL << (32-5)));
+        D DP("Instruction MUL");
+        
+        //read three addresses
+        bitword = readWord();
+        D DPV("Reg1: ", bitword);
+        ins = (ins | (bitword << (32-10)));
+
+        bitword = readWord();
+        D DPV("Reg2: ", bitword);
+        ins = (ins | (bitword << (32-15)));
+
+        bitword = readWord();
+        D DPV("Reg3: ", bitword);
+        ins =  (ins | (bitword << (32-20)));
 
         D DPV("Machine code instruction: ", ins);
         DEL;

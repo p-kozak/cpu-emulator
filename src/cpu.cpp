@@ -4,25 +4,36 @@ using namespace std;
    
 Cpu::Cpu(/* args */){
     instruction = 0;
-    asmb.convertAssemblyToMachineCode(memory);
+    asmb.convertAssemblyToMachineCode(memory, readProgram());
+    //exit(0);
     dbg = 0;
     memory.printMemory();
     asmb.addAddressesToJumps(memory);
-    memory.printMemory();
+    //memory.printMemory();
     //To run units tets, comment this out
-    while(dbg < -5){
+    while(1){
         //Execute while True. Program should exit automatically at the end
         //Might implement some safety measurement later...
-        
+        D DPV("PC is: ", pc.checkCounter());
         instructionExecute(memory.readCell(pc.checkCounter()));
-        cout << registers.readRegister(0) << " "
-        << registers.readRegister(1) << " "
-        << registers.readRegister(2) << endl;
+        // cout << registers.readRegister(0) << " "
+        // << registers.readRegister(1) << " "
+        // << registers.readRegister(2) << endl;
+        registers.printRegisters();
         dbg++;
     }
+    memory.printMemory();
 }
 
 Cpu::~Cpu(){
+
+}
+
+std::string Cpu::readProgram(){
+    std::string name;
+    cout << "Input path to the program:" << endl;
+    cin >> name;
+    return name;
 
 }
 
@@ -91,6 +102,15 @@ void Cpu::instructionExecute(int32_t instruction){
             registers.writeRegister(regTargetAddress, alu.add(regSecondVal, regThirdVal));
             pc.incrementCounter();
             break;
+        case MUL:
+            regTargetAddress = instructionDecodeFirstRegister(instruction);
+            regSecondAddress = instructionDecodeSecondRegister(instruction);
+            regThirdAddress = instructionDecodeThirdRegister(instruction);
+            regSecondVal = registers.readRegister(regSecondAddress);
+            regThirdVal = registers.readRegister(regThirdAddress);
+            registers.writeRegister(regTargetAddress, alu.mul(regSecondVal, regThirdVal));
+            pc.incrementCounter();
+            break;
         case ADDI:
             //Here I am using the rhird register variable just to store the value of ADDI immediate value
             regTargetAddress = instructionDecodeFirstRegister(instruction);
@@ -138,8 +158,22 @@ void Cpu::instructionExecute(int32_t instruction){
                 //otherwise, let the jump happen 
                 pc.incrementCounter();
             }
-            
             break;
+        case BNE:
+            //retrive two first registers and their vaue
+            regTargetAddress = instructionDecodeFirstRegister(instruction);
+            regSecondAddress = instructionDecodeSecondRegister(instruction);
+            regTargetVal = registers.readRegister(regTargetAddress); 
+            regSecondVal = registers.readRegister(regSecondAddress);
+            //if branch taken, omit the jump
+            if(regTargetVal != regSecondVal){
+                pc.incrementCounter(2); 
+            }else{
+                //otherwise, let the jump happen 
+                pc.incrementCounter();
+            }
+            break;
+
         case LBL:
             // just break, nothing to do here
             pc.incrementCounter();
@@ -151,6 +185,8 @@ void Cpu::instructionExecute(int32_t instruction){
             break;
 
         case EF:
+            //print memory and exit
+            memory.printMemory();
             std::exit(0);
 
     }

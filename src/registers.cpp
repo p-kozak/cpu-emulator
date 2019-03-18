@@ -29,3 +29,10 @@ int32_t Registers::readRegister(int32_t index){
     }
 
 }
+
+void Registers::printRegisters(){
+    for(int i = 0; i < 32; i++){
+        std::cout << readRegister(i) << " ";
+    }
+    std::cout << std::endl;
+}

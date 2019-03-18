@@ -3,6 +3,7 @@
 
 #include "config.h"
 #include <memory>
+#include <string>
 #include "memory.h" 
 #include "registers.h"
 #include "alu.h"
@@ -36,6 +37,7 @@ public:
     int32_t instructionDecodeThirdRegister(int32_t instruction);
     int32_t instructionDecodeMemoryAddress(int32_t instruction);
     int32_t instructionDecodeAddiNumber(int32_t instruction);
+    std::string readProgram();
 
 
     //Functions for execution
