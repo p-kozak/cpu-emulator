@@ -8,11 +8,21 @@ to fail otherwise*/
 #include <iostream>
 #define NUMBER_OF_REGISTERS 32 
 #define DEBUG   //comment out to exit debug mode
+#define DEBUGALL // same
+
 #ifdef DEBUG
  #define D if(1) 
 #else
  #define D if(0) 
 #endif
+
+#ifdef DEBUGALL
+ #define DA if(1) 
+#else
+ #define DA if(0) 
+#endif
+
+
 #define DS cout << 
 #define DE << endl
 #define DEL cout << endl

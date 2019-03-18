@@ -174,3 +174,46 @@ int32_t Assembler::readSingleLine(std::string opcode){
     return ins;
 }
 
+
+void Assembler::addAddressesToJumps(Memory &memory){
+    D DP("Matching labels...");
+    int32_t address, tempcounter, opcode, index, opcodetemp, indextemp, ins;
+    // go through the whole memory to find labels
+    address = 0;
+    do{
+        opcode = (memory.readCell(address) &(0b11111 << (32-5))) >> (32-5);
+        //find labels
+        if(opcode == LBL){
+            
+            //if label, iterate from the very beginning and find matching jump
+            //but first, store index of label
+            index = (memory.readCell(address) &(0b11111 << (32-10))) >> (32-10);
+            tempcounter = 0 ;
+            D DPV("I found label at address: ", address);
+            D DPV("Its index is: ", index);
+            while(true){ //could add condition to check if not eof
+                //check if jump
+                opcodetemp = (memory.readCell(tempcounter) & (0b11111 << (32-5))) >> (32-5);
+                if(opcodetemp == JP){
+                    //check if matching index
+                    indextemp =  (memory.readCell(tempcounter) &(0b11111 << (32-10))) >> (32-10);
+                    if(indextemp == index){
+                        D DPV("I found matching jump at address: ", tempcounter);
+                        D DPV("Its index is: ", indextemp);
+                        //eveyrthing is matching so retive jump instruction from memory
+                        ins = memory.readCell(tempcounter);
+                        D DPV("Old instruction of this jumps is:", ins);
+                        ins = ins | address;
+                        D DPV("New instruction of this jumps is:", ins);
+                        DEL;
+                        memory.writeCell(tempcounter, ins);
+                        break;
+                    }
+                }     
+            tempcounter +=1;
+            } 
+        }
+    address += 1;
+    }while(opcode != EF);
+    DEL;
+}

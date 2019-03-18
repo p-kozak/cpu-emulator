@@ -16,7 +16,7 @@ class Assembler{
     /*First, assembler has to convert assembly to machine code. When it's complete,
     the another function skims over memory, finds all jump instructions and then looks for a labels and
     replaces indices with addresses*/
-    void addAddressesToJumps();
+    void addAddressesToJumps(Memory &memory);
     void convertAssemblyToMachineCode(Memory &memory);
     int32_t readSingleLine(std::string opcode);
     int32_t readWord();

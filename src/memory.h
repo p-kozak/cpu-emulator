@@ -26,7 +26,7 @@ branch equal. After brnach there is always a jump instructon. If the branch is t
 Not smart but works 
 
 LBL: 5 opcode, 5 number of label 
-JP: 5 opcode, 5 number of label, 22 for address. Address in initially empty, it will be 
+JP: 5 opcode, 5 number of label, 22 for address. Address in initially empty, it will be matched wit hlabel by assembler
 opcodes:
 ADD     00000
 ADDI    00001
@@ -44,11 +44,12 @@ class Memory{
     std::vector<int32_t>  memory;
 
     public:
-    void writeCell(int32_t cell, int32_t content);
+    void writeCell(uint32_t cell, int32_t content);
     int32_t readCell(int32_t cell); 
     void pushCell(int32_t content);
-    
-
+    void printMemory(uint32_t num);
+    void printMemory();   
 };
+
 
 #endif 

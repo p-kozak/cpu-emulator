@@ -6,8 +6,11 @@ Cpu::Cpu(/* args */){
     instruction = 0;
     asmb.convertAssemblyToMachineCode(memory);
     dbg = 0;
+    memory.printMemory();
+    asmb.addAddressesToJumps(memory);
+    memory.printMemory();
     //To run units tets, comment this out
-    while(dbg < 10){
+    while(dbg < -5){
         //Execute while True. Program should exit automatically at the end
         //Might implement some safety measurement later...
         

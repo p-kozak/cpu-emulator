@@ -11,11 +11,11 @@ int32_t Memory::readCell(int32_t cell){
     return 0;
 }
 
-void Memory::writeCell(int32_t cell, int32_t content){
-    if(cell >= (int32_t)memory.size()){
+void Memory::writeCell(uint32_t cell, int32_t content){
+    if(cell < memory.size()){
         memory[cell] = content;
     }else{
-        cout << "ERROR: Trying to write to NULL address. Push instrad" << endl;
+        cout << "ERROR: Trying to write to NULL address: " << cell << " Size is: " << memory.size() << endl;
     }
 }
 
@@ -24,4 +24,23 @@ void Memory::pushCell(int32_t content){
     return; 
 }
 
+void Memory::printMemory(uint32_t num){
+    //prints n elements in the vector
+    if(num > memory.size()){
+        return;
+    }
+    for(uint32_t i = 0; i < num; i++){
+        cout << readCell(i) << " ";
+    }
+    cout << endl;
+}
+
+void Memory::printMemory(){
+    int size = memory.size();
+    for(int i = 0; i < size; i++){
+        cout << readCell(i) << " ";
+    }
+    cout << endl;
+
+}
 
