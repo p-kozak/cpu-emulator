@@ -5,7 +5,7 @@
 
 class ProgramCounter{
     private:
-    int counter;
+    uint32_t counter;
     
     public:
     ProgramCounter();
