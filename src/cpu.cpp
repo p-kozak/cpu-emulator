@@ -11,7 +11,7 @@ Cpu::Cpu(/* args */){
     asmb.addAddressesToJumps(memory);
     //memory.printMemory();
     //To run units tets, comment this out
-    while(1){
+    while(1 && dbg < 30){
         //Execute while True. Program should exit automatically at the end
         //Might implement some safety measurement later...
         D DPV("PC is: ", pc.checkCounter());
@@ -19,8 +19,8 @@ Cpu::Cpu(/* args */){
         // cout << registers.readRegister(0) << " "
         // << registers.readRegister(1) << " "
         // << registers.readRegister(2) << endl;
-        registers.printRegisters();
-        dbg++;
+        D registers.printRegisters();
+        //dbg++;
     }
     memory.printMemory();
 }
@@ -99,6 +99,7 @@ void Cpu::instructionExecute(int32_t instruction){
             regThirdAddress = instructionDecodeThirdRegister(instruction);
             regSecondVal = registers.readRegister(regSecondAddress);
             regThirdVal = registers.readRegister(regThirdAddress);
+            DA cout << "Executing instruction ADD. Adding reg" <<regSecondAddress<<"(" << regSecondVal <<") to reg" <<regThirdAddress <<"("<<regThirdVal << "). Saving to reg" <<regTargetAddress << "(" << alu.add(regSecondVal, regThirdVal) << ")" << endl;
             registers.writeRegister(regTargetAddress, alu.add(regSecondVal, regThirdVal));
             pc.incrementCounter();
             break;
