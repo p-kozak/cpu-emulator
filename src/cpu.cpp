@@ -90,12 +90,14 @@ int32_t Cpu::instructionDecodeAddiNumber(int32_t instruction){
 //Instruction execution
 
 void Cpu::instructionExecute(int32_t instruction){
+    D DPV("Executing instruction: ", instruction);
     int32_t opcode = instructionDecodeOpcode(instruction);
     //cout << "Opcode " << opcode << endl;
     //not all will be used but I declare  them here to not waste space
     int32_t regTargetAddress, regTargetVal, regSecondAddress, regThirdAddress, memoryAddress, regSecondVal, regThirdVal, memoryVal; 
     switch(opcode){
         case ADD:
+            D DP("Instruction ADD");
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             regSecondAddress = instructionDecodeSecondRegister(instruction);
             regThirdAddress = instructionDecodeThirdRegister(instruction);
@@ -106,6 +108,7 @@ void Cpu::instructionExecute(int32_t instruction){
             pc.incrementCounter();
             break;
         case MUL:
+            D DP("Instruction MUL");
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             regSecondAddress = instructionDecodeSecondRegister(instruction);
             regThirdAddress = instructionDecodeThirdRegister(instruction);
@@ -115,6 +118,7 @@ void Cpu::instructionExecute(int32_t instruction){
             pc.incrementCounter();
             break;
         case ADDI:
+            D DP("Instruction ADDI");
             //Here I am using the rhird register variable just to store the value of ADDI immediate value
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             regSecondAddress = instructionDecodeSecondRegister(instruction);
@@ -124,6 +128,7 @@ void Cpu::instructionExecute(int32_t instruction){
             pc.incrementCounter();
             break;
         case SUB:
+            D DP("Instruction SUB");
             //Decode addresses of 3 registers
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             regSecondAddress = instructionDecodeSecondRegister(instruction);
@@ -136,6 +141,7 @@ void Cpu::instructionExecute(int32_t instruction){
             pc.incrementCounter();
             break;
         case LW:
+             D DP("Instruction LW");
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             memoryAddress = instructionDecodeMemoryAddress(instruction);
             memoryVal = memory.readCell(memoryAddress);
@@ -143,12 +149,14 @@ void Cpu::instructionExecute(int32_t instruction){
             pc.incrementCounter();
             break;
         case SW:
+        D DP("Instruction SW");
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             regTargetVal = registers.readRegister(regTargetAddress);
             memory.pushCell(regTargetVal);
             pc.incrementCounter();
             break;
         case BEQ:
+        D DP("Instruction BEQ");
             //retrive two first registers and their vaue
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             regSecondAddress = instructionDecodeSecondRegister(instruction);
@@ -163,6 +171,7 @@ void Cpu::instructionExecute(int32_t instruction){
             }
             break;
         case BNE:
+        D DP("Instruction BNE");
             //retrive two first registers and their vaue
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             regSecondAddress = instructionDecodeSecondRegister(instruction);
@@ -178,6 +187,7 @@ void Cpu::instructionExecute(int32_t instruction){
             break;
 
         case GEQ:
+        D DP("Instruction GEQ");
             //retrive two first registers and their vaue
             regTargetAddress = instructionDecodeFirstRegister(instruction);
             regSecondAddress = instructionDecodeSecondRegister(instruction);
@@ -193,19 +203,25 @@ void Cpu::instructionExecute(int32_t instruction){
             break;
 
         case LBL:
+        D DP("Instruction LBL");
             // just break, nothing to do here
             pc.incrementCounter();
             break;
         case JP:
+        D DP("Instruction JP");
             //First, decode memory address. You don't need to decode label number as it was transalted to memory address by assembler
             memoryAddress = instructionDecodeMemoryAddress(instruction);
             pc.setCounter(memoryAddress);
             break;
 
         case EF:
+        D DP("Instruction EF");
             //print memory and exit
             memory.printMemory();
             std::exit(0);
+        default:
+            cout << "Wrong instruction. Exiting" << endl;
+            std::exit(1);
 
     }
 }

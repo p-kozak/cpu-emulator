@@ -31,6 +31,7 @@ int32_t Registers::readRegister(int32_t index){
 }
 
 void Registers::printRegisters(){
+    std::cout << "Registers: " ;
     for(int i = 0; i < 32; i++){
         std::cout << readRegister(i) << " ";
     }

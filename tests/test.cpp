@@ -90,28 +90,6 @@ TEST_CASE("CPU"){
         cpu.instructionExecute(ins6);
 
         REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
-        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
         REQUIRE(cpu.registers.readRegister(4) == 15);
         
     }

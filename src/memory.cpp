@@ -8,6 +8,7 @@ int32_t Memory::readCell(int32_t cell){
         return memory[cell];
     }else{
         cout << "ERROR: Trying to read NULL memory address" << endl;
+        std::exit(1);
     }
     return 0;
 }
@@ -24,7 +25,7 @@ void Memory::writeCell(uint32_t cell, int32_t content){
 }
 
 void Memory::pushCell(int32_t content){
-    DA DPV("Pushing memoery with: ", content);
+    D DPV("Pushing memory with: ", content);
     memory.push_back(content);
     return; 
 }
