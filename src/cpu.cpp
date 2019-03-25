@@ -6,7 +6,7 @@ Cpu::Cpu(/* args */){
     instruction = 0;
     asmb.convertAssemblyToMachineCode(memory, readProgram());
     //exit(0);
-    dbg = 0;
+    dbg = 0; insc = 0;
     memory.printMemory();
     asmb.addAddressesToJumps(memory);
     //memory.printMemory();
@@ -16,6 +16,8 @@ Cpu::Cpu(/* args */){
         //Might implement some safety measurement later...
         D DPV("PC is: ", pc.checkCounter());
         instructionExecute(memory.readCell(pc.checkCounter()));
+
+        insc++;
         // cout << registers.readRegister(0) << " "
         // << registers.readRegister(1) << " "
         // << registers.readRegister(2) << endl;

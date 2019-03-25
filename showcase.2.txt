@@ -1,19 +1,17 @@
-ADDI 15 15 2
-SW 15
-ADDI 0 0 3
-ADDI 1 1 1000
+ADDI 0 0 2	  //lower limit
+ADDI 1 1 1000 //upper limit
 LBL 0
 GEQ 1 0
 JP 2
-//Check prime happens here huh
+//First nested loop starts
 SUB 3 3 3
 ADDI 3 3 2
 LBL 4
 GEQ 0 3
-ADDI 10 10 10 <- this never heppens actually
+ADDI 10 10 10 //This line never happens actually
 BNE 0 3
 JP 3
-//Check prime for specific substractor begins
+//Nested loop 2 stars
 SUB 2 2 2
 ADD 2 2 0
 LBL 6
@@ -22,14 +20,14 @@ JP 7
 SUB 2 2 3
 JP 6
 LBL 7
-BEQ 2 17 <- 17 is unused register so is equal 0
+BEQ 2 17 //17 is unused register so is equal 0
 JP 5
 JP 10
-//Check prime for specific substractor ends
+//Nested loop 2 end
 LBL 5
 ADDI 3 3 1
 JP 4
-//Check prime ends
+//First nested loop ends
 LBL 3
 SW 0
 LBL 10

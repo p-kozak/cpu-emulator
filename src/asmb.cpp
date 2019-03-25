@@ -99,7 +99,7 @@ int32_t Assembler::readSingleLine(std::string opcode){
     }
 
     if(opcode == "LW"){
-        ins = (ins | (ADDI << (32-5)));
+        ins = (ins | (LW << (32-5)));
         D DP("Instruction LW");
         //read target register
         bitword = readWord();

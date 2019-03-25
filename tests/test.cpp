@@ -90,7 +90,30 @@ TEST_CASE("CPU"){
         cpu.instructionExecute(ins6);
 
         REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
+        REQUIRE(cpu.registers.readRegister(4) == 15); REQUIRE(cpu.registers.readRegister(3) == 9);
         REQUIRE(cpu.registers.readRegister(4) == 15);
+        
     }
 
 
@@ -116,11 +139,11 @@ TEST_CASE("CPU"){
     }
 
     SECTION("ASM"){
-        Assembler asmb;
+     /*   Assembler asmb;
         asmb.convertAssemblyToMachineCode(cpu.memory);
         for(int i =0; i < 5; i++){
             cout << cpu.memory.readCell(i) << endl;
-        }
+        }*/
     }
 
 }

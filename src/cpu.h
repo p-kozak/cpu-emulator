@@ -21,8 +21,9 @@ public:
     Registers registers;
     Assembler asmb;
 
+
     int32_t instruction;
-    int dbg;
+    int dbg, insc;
 
 public:
     Cpu(/* args */);
