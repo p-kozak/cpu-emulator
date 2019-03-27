@@ -16,6 +16,7 @@ void Registers::writeRegister(int32_t index, int32_t content){
         registers[index] = content;
     }else{
         std::cout << "ERROR: Wrong address of register" << std::endl;
+        std::exit(1);
     }
     return;
 }
@@ -25,6 +26,7 @@ int32_t Registers::readRegister(int32_t index){
         return registers[index];
     }else{
         std::cout << "ERROR: Wrong address of register" << std::endl;
+        std::exit(1);
         return 0;
     }
 

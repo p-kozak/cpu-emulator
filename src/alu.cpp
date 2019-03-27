@@ -16,6 +16,6 @@ int32_t Alu::mul(int32_t x, int32_t y){
     return x * y;
 }
 
-bool geq(int32_t x, int32_t y){
+bool Alu::geq(int32_t x, int32_t y){
     return x>=y;
 }

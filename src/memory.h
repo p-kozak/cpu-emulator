@@ -39,6 +39,9 @@ BEQ     00101  BRANCH EQUAL
 LBL     00110   label
 JP      00111   jump to label
 EF      01000   end of file
+BNE 	01001
+MUL 	01010,	
+GEQ 	01011
 */
 
 class Memory{

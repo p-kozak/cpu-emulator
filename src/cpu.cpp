@@ -5,26 +5,19 @@ using namespace std;
 Cpu::Cpu(/* args */){
     instruction = 0;
     asmb.convertAssemblyToMachineCode(memory, readProgram());
-    //exit(0);
-    dbg = 0; insc = 0;
+    cout << "Program memory:" << endl;
     memory.printMemory();
     asmb.addAddressesToJumps(memory);
     //memory.printMemory();
     //To run units tets, comment this out
-    while(1 && dbg < 30){
-        //Execute while True. Program should exit automatically at the end
-        //Might implement some safety measurement later...
+    while(1){
+        //Execute while True. Program should exit automatically at the EF instruction(done in cpu.cpp file)
         D DPV("PC is: ", pc.checkCounter());
         instructionExecute(memory.readCell(pc.checkCounter()));
 
-        insc++;
-        // cout << registers.readRegister(0) << " "
-        // << registers.readRegister(1) << " "
-        // << registers.readRegister(2) << endl;
+       
         D registers.printRegisters();
-        //dbg++;
     }
-    memory.printMemory();
 }
 
 Cpu::~Cpu(){
@@ -73,9 +66,8 @@ int32_t Cpu::instructionDecodeMemoryAddress(int32_t instruction){
 }
 
 int32_t Cpu::instructionDecodeAddiNumber(int32_t instruction){
-    // DONE. Work on this, not complete. return 17 bit's in 2's complement but won't be recognised as such
     // Actually I'm not sure if all this mess is required. Probably I could just cast the instruction to int16_t and work on this...
-    // But ir works so I'm fine :)))
+    // But it works so I'm fine :)))
 
     int32_t numBin = (instruction & (0xFFFF));
     int32_t sign  = numBin >> 15; 
@@ -92,7 +84,6 @@ int32_t Cpu::instructionDecodeAddiNumber(int32_t instruction){
 void Cpu::instructionExecute(int32_t instruction){
     D DPV("Executing instruction: ", instruction);
     int32_t opcode = instructionDecodeOpcode(instruction);
-    //cout << "Opcode " << opcode << endl;
     //not all will be used but I declare  them here to not waste space
     int32_t regTargetAddress, regTargetVal, regSecondAddress, regThirdAddress, memoryAddress, regSecondVal, regThirdVal, memoryVal; 
     switch(opcode){
@@ -217,6 +208,7 @@ void Cpu::instructionExecute(int32_t instruction){
         case EF:
         D DP("Instruction EF");
             //print memory and exit
+            cout << endl<< "Program and data memory:" << endl;
             memory.printMemory();
             std::exit(0);
         default:

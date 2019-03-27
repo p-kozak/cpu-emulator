@@ -71,7 +71,7 @@ int32_t Assembler::readSingleLine(std::string opcode){
         ins =  (ins | (bitword << (32-20)));
 
         D DPV("Machine code instruction: ", ins);
-        DEL;
+        D DEL;
     }
 
     if(opcode == "ADDI"){
@@ -94,7 +94,7 @@ int32_t Assembler::readSingleLine(std::string opcode){
         ins = (ins | bitword);
         
         D DPV("Machine code instruction: ", ins);
-        DEL;
+        D DEL;
 
     }
 
@@ -111,7 +111,7 @@ int32_t Assembler::readSingleLine(std::string opcode){
         ins = (ins | bitword);
 
         D DPV("Machine code instruction: ", ins);
-        DEL;
+        D DEL;
     }
 
     if(opcode == "SW"){
@@ -123,7 +123,7 @@ int32_t Assembler::readSingleLine(std::string opcode){
         ins = (ins | (bitword << (32-10)));
 
         D DPV("Machine code instruction: ", ins);
-        DEL;
+        D DEL;
     }
 
     if(opcode == "BEQ" || opcode == "BNE" || opcode == "GEQ"){
@@ -146,7 +146,7 @@ int32_t Assembler::readSingleLine(std::string opcode){
         ins = (ins | (bitword << (32-15)));
 
         D DPV("Machine code instruction: ", ins);
-        DEL;
+        D DEL;
 
     }
 
@@ -161,7 +161,7 @@ int32_t Assembler::readSingleLine(std::string opcode){
         ins = (ins | (bitword << (32-10)));
 
         D DPV("Machine code instruction: ", ins);
-        DEL;
+        D DEL;
 
     }
 
@@ -174,7 +174,7 @@ int32_t Assembler::readSingleLine(std::string opcode){
         ins = (ins | (bitword << (32-10)));
 
         D DPV("Machine code instruction: ", ins);
-        DEL;
+        D DEL;
 
     }
 
@@ -183,7 +183,7 @@ int32_t Assembler::readSingleLine(std::string opcode){
         D DP("Instruction EF");
 
         D DPV("Machine code instruction: ", ins);
-        DEL;
+        D DEL;
     }
     
     if(opcode == "MUL"){
@@ -204,7 +204,7 @@ int32_t Assembler::readSingleLine(std::string opcode){
         ins =  (ins | (bitword << (32-20)));
 
         D DPV("Machine code instruction: ", ins);
-        DEL;
+        D DEL;
     }
 
     return ins;
@@ -241,7 +241,7 @@ void Assembler::addAddressesToJumps(Memory &memory){
                         D DPV("Old instruction of this jumps is:", ins);
                         ins = ins | address;
                         D DPV("New instruction of this jumps is:", ins);
-                        DEL;
+                        D DEL;
                         memory.writeCell(tempcounter, ins);
                         break;
                     }
@@ -251,5 +251,5 @@ void Assembler::addAddressesToJumps(Memory &memory){
         }
     address += 1;
     }while(opcode != EF);
-    DEL;
+    D DEL;
 }

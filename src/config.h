@@ -7,7 +7,9 @@ to fail otherwise*/
 #include <stdint.h>
 #include <iostream>
 #define NUMBER_OF_REGISTERS 32 
-#define DEBUG   //comment out to exit debug mode
+
+
+//#define DEBUG   //comment out to exit debug mode
 //#define DEBUGALL // same
 
 #ifdef DEBUG
